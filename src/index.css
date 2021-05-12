@@ -3,6 +3,10 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+
+    background: linear-gradient(0deg, rgba(2,0,36,1) 0%, rgba(63,102,201,1) 52%, rgba(37,166,193,1) 100%) center fixed;
+    background-size: cover;
+
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +14,64 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+
+.forecast {
+  display: flex;
+  justify-content: center;
+}
+
+.clear {
+  background: url('../src/img/clear.jpeg') center;
+  background-position: center;
+  border-radius: 20px;
+  border-style: outset;
+  margin-top: 100px;
+  padding: 50px;
+}
+
+.clouds {
+  background: url('../src/img/clouds.jpeg');
+  background-position: center;
+  border-radius: 20px;
+  border-style: outset;
+  margin-top: 100px;
+  padding: 50px;
+}
+
+.rain {
+  background: url('../src/img/rain.jpeg');
+  background-position: center;
+  border-radius: 20px;
+  border-style: outset;
+  margin-top: 100px;
+  padding: 50px;
+}
+
+.snow {
+  background: url('../src/img/snow.jpeg');
+  background-position: center;
+  border-radius: 20px;
+  border-style: outset;
+  margin-top: 100px;
+  padding: 50px;
+}
+
+.thunderstorm {
+  background: url('../src/img/thunderstorm.jpeg');
+  background-position: center;
+  border-radius: 20px;
+  border-style: outset;
+  margin-top: 100px;
+  padding: 50px;
+}
+
+.default {
+  background: url('../src/img/default.jpeg');
+  background-position: center;
+  border-radius: 20px;
+  border-style: outset;
+  margin-top: 100px;
+  padding: 50px;
 }

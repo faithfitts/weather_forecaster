@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Form from "./Form";
+import Card from "react-bootstrap/Card";
 
 // Open Weather API Call
 const apiKey = "ee272a441023608a6dff62d428450270";
@@ -16,10 +17,11 @@ class Forecast extends Component {
       zipCode: "",
       city: "",
       description: "",
-      weather: "",
+      temperature: "",
       feelsLike: "",
       humidity: "",
       wind: "",
+      condition: "",
     };
   }
 
@@ -37,10 +39,11 @@ class Forecast extends Component {
         this.setState({
           city: res.data.city.name,
           description: res.data.list[0].weather[0].description,
-          weather: res.data.list[0].main.temp,
+          temperature: res.data.list[0].main.temp,
           feelsLike: res.data.list[0].main.feels_like,
           humidity: res.data.list[0].main.humidity,
           wind: res.data.list[0].wind.speed,
+          condition: res.data.list[0].weather[0].main,
         })
       )
       .catch((error) => {
@@ -54,32 +57,101 @@ class Forecast extends Component {
     const {
       city,
       description,
-      weather,
+      temperature,
       feelsLike,
       humidity,
       wind,
+      condition,
     } = this.state;
 
-    if (!weather && !city && !description && !feelsLike && !humidity && !wind) {
+    if (!city) {
       forecastDisplay = "";
+    } else if (condition === "Clear") {
+      forecastDisplay = (
+        <div className="forecast">
+          <Card className="clear">
+            <h1>Current Forecast For: {city}</h1>
+            <h1>Current Conditon: {description}</h1>
+            <h1>Current Temp: {Math.floor(temperature)}°F</h1>
+            <h1>Feels Like: {Math.floor(feelsLike)}°F</h1>
+            <h1>Humidity: {humidity}%</h1>
+            <h1>Wind: {Math.floor(wind)} mph</h1>
+          </Card>
+        </div>
+      );
+    } else if (condition === "Clouds") {
+      forecastDisplay = (
+        <div className="forecast">
+          <Card className="clouds">
+            <h1>Current Forecast For: {city}</h1>
+            <h1>Current Conditon: {description}</h1>
+            <h1>Current Temp: {Math.floor(temperature)}°F</h1>
+            <h1>Feels Like: {Math.floor(feelsLike)}°F</h1>
+            <h1>Humidity: {humidity}%</h1>
+            <h1>Wind: {Math.floor(wind)} mph</h1>
+          </Card>
+        </div>
+      );
+    } else if (condition === "Rain" || "Drizzle") {
+      forecastDisplay = (
+        <div className="forecast">
+          <Card className="rain">
+            <h1>Current Forecast For: {city}</h1>
+            <h1>Current Conditon: {description}</h1>
+            <h1>Current Temp: {Math.floor(temperature)}°F</h1>
+            <h1>Feels Like: {Math.floor(feelsLike)}°F</h1>
+            <h1>Humidity: {humidity}%</h1>
+            <h1>Wind: {Math.floor(wind)} mph</h1>
+          </Card>
+        </div>
+      );
+    } else if (condition === "Snow") {
+      forecastDisplay = (
+        <div className="forecast">
+          <Card className="snow">
+            <h1>Current Forecast For: {city}</h1>
+            <h1>Current Conditon: {description}</h1>
+            <h1>Current Temp: {Math.floor(temperature)}°F</h1>
+            <h1>Feels Like: {Math.floor(feelsLike)}°F</h1>
+            <h1>Humidity: {humidity}%</h1>
+            <h1>Wind: {Math.floor(wind)} mph</h1>
+          </Card>
+        </div>
+      );
+    } else if (condition === "Thunderstorm") {
+      forecastDisplay = (
+        <div className="forecast">
+          <Card className="thunderstorm">
+            <h1>Current Forecast For: {city}</h1>
+            <h1>Current Conditon: {description}</h1>
+            <h1>Current Temp: {Math.floor(temperature)}°F</h1>
+            <h1>Feels Like: {Math.floor(feelsLike)}°F</h1>
+            <h1>Humidity: {humidity}%</h1>
+            <h1>Wind: {Math.floor(wind)} mph</h1>
+          </Card>
+        </div>
+      );
     } else {
       forecastDisplay = (
-        <div className="forecast-display">
-          <h1>Current Forecast For: {city}</h1>
-          <h1>Current Conditon: {description}</h1>
-          <h1>Current Temp: {Math.floor(weather)}°F</h1>
-          <h1>Feels Like: {Math.floor(feelsLike)}°F</h1>
-          <h1>Humidity: {humidity}%</h1>
-          <h1>Wind: {Math.floor(wind)} mph</h1>
+        <div className="forecast">
+          <Card className="default">
+            <h1>Current Forecast For: {city}</h1>
+            <h1>Current Conditon: {description}</h1>
+            <h1>Current Temp: {Math.floor(temperature)}°F</h1>
+            <h1>Feels Like: {Math.floor(feelsLike)}°F</h1>
+            <h1>Humidity: {humidity}%</h1>
+            <h1>Wind: {Math.floor(wind)} mph</h1>
+          </Card>
         </div>
       );
     }
 
     return (
-      <div className="heading">
-        Weather Forecast!
+      <div className="heading" style={{ marginTop: "80px" }}>
+        <h1>Weather Forecaster!</h1>
+        <h4>Enter A Zip Code Below To See The Current Tempurature</h4>
         <Form
-          weather={weather}
+          temperature={temperature}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
         />
